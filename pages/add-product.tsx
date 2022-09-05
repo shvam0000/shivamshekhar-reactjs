@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Navbar } from '../components';
-import axios from 'axios';
 
 const optionsList = [
   {
@@ -29,14 +29,7 @@ const AddProduct = () => {
   const [avatar, setAvatar] = useState<string>('');
   const [email, setEmail] = useState<string>('shvam0000@gmail.com');
 
-  const data = {
-    name: name,
-    price: price,
-    category: category,
-    description: description,
-    avatar: avatar,
-    email: email,
-  };
+  const router = useRouter();
 
   const submitHandler = () => {
     fetch(`https://upayments-studycase-api.herokuapp.com/api/products`, {
@@ -55,6 +48,7 @@ const AddProduct = () => {
     })
       .then((res) => {
         console.log(res);
+        router.replace('/');
       })
       .catch((err) => {
         console.log(err);
